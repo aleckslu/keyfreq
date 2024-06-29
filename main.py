@@ -49,7 +49,6 @@ REMAP = {
     Key.shift_l: Key.shift,
 }
 
-# TODO control keys for more symbols
 CONTROL_KEYS = {
     "'\\x01'": "a",
     "'\\x02'": "b",
@@ -111,6 +110,9 @@ def set_total():
     attribute = "_TOTAL_LOG"
     KEY_LOG.setdefault(attribute, {})
 
+    for key in KEY_LOG[attribute]:
+        KEY_LOG[attribute][key] = 0
+
     for process_name, log in KEY_LOG.items():
         if not process_name == attribute:
             for key, count in log.items():
@@ -165,12 +167,9 @@ def key_to_str(key):
     s = str(key)
 
     if not is_key_a_symbol(key):
-        # print(f".keys for key: {key} dir: {key.__dict__.keys()}")
-        # print(f".values for key: {key} dir: {key.__dict__.values()}")
         s = f"<{key._name_}>"
     elif s in CONTROL_KEYS:
         s = CONTROL_KEYS[s]
-        print(f"ctrl changed key: {s}")
     else:
         s = key.char
         # s = s.encode("latin-1", "backslashreplace").decode("unicode-escape")
