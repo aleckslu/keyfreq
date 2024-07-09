@@ -9,8 +9,12 @@ import psutil
 JSON_FILE_NAME = "key-freq.json"
 BACKUP_FILE_NAME = "key-freq-backup.json"
 
+# Sorting
+SORT_LOGS = True
+SORT_DESCENDING = True
+
 # Save every x number of keystrokes
-SAVE_INTERVAL = 500
+SAVE_INTERVAL = 1000
 
 # print each keypress onto terminal
 LOG_TO_TERMINAL = True
@@ -120,6 +124,26 @@ def set_total():
                 KEY_LOG[attribute][key] += count
 
 
+def sort_by_count():
+    global SORT_DESCENDING, KEY_LOG
+
+    sorted_totals = json.dumps(
+        {
+            k: v
+            for k, v in sorted(
+                KEY_LOG["_TOTAL_LOG"].items(),
+                key=lambda item: item[1],
+                reverse=SORT_DESCENDING,
+            )
+        }
+    )
+    print(f"sorted_totals: {sorted_totals}")
+    # print(f"sorted key_log: {sorted(key_log["_total_log"].items(), key=lambda item:item[1])}")
+    # print(KEY_LOG["_TOTAL_LOG"])
+    # for log in KEY_LOG:
+    #     sorted=
+
+
 def get_process_name():
     user32 = ctypes.WinDLL("user32")
     hwnd = user32.GetForegroundWindow()
@@ -187,6 +211,8 @@ def key_down(key):
     if key == Key.f17:
         print("f17, exiting")
         set_total()
+        if SORT_LOGS:
+            sort_by_count()
         save_data_to_json()
         return False
 
