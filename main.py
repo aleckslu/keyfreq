@@ -15,6 +15,12 @@ SORT_DESCENDING = True
 
 # Save every x number of keystrokes
 SAVE_INTERVAL = 1000
+MIN_KEYS_TO_SAVE = 100
+# Blacklist - Apps to NOT Record keystrokes from
+    # Will only check for blacklisted app if current program isn't already in KEY_LOG
+    # Run a Blacklist check at start of script, removing logged data from its program specific log and TOTAL_LOG
+# BLACKLISTED_APPS = []
+
 
 # print each keypress onto terminal
 LOG_TO_TERMINAL = True
