@@ -15,15 +15,6 @@ SORT_DESCENDING = True
 
 # Save every x number of keystrokes
 SAVE_INTERVAL = 1000
-MIN_KEYS_TO_SAVE = 100
-# Blacklist - Apps to NOT Record keystrokes from
-    # Will only check for blacklisted app if current program isn't already in KEY_LOG
-    # Run a Blacklist check at start of script, removing logged data from its program specific log and TOTAL_LOG
-# BLACKLISTED_APPS = []
-
-
-# print each keypress onto terminal
-LOG_TO_TERMINAL = True
 
 LOCKED_IN_GARBAGE_COLLECTION_LIMIT = 5
 
@@ -214,8 +205,8 @@ def key_down(key):
     keys_currently_down.append(key)
     record_key(get_process_name(), key_to_str(key))
 
-    if key == Key.f17:
-        print("f17, exiting")
+    if key == Key.f21:
+        print("f21, exiting")
         set_total()
         if SORT_LOGS:
             sort_by_count()
